@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Animal Information</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>Animal Information</h1>
+    </header>
+    
+    <div class="main">
+        <div class="dropdown">
+            <select class="animal-select" id="ddlAnimal" title="Animal Drop Down">
+              <option value="">Select Animal</option>
+              <% animals.forEach(animal => { %>
+                <option value="<%= animal.name %>"><%= animal.animalId + ". " + animal.name %></option>
+              <% }); %>
+            </select>
+        </div>
+        
+        <div id="animal-info">
+            <% if (animalData) { %>
+                <strong><%= animalData.name %>:</strong> <%= animalData.description %>
+            <% } else if (error) { %>
+                <strong style="color: red"> <%= error %> </strong>
+            <% } else { %>
+                Select an animal from the dropdown to see more information.
+            <% } %>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 CA Animal Information. All rights reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
