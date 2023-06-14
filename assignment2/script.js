@@ -24,6 +24,7 @@ ddlAnimal.addEventListener('change', function(){
   else{
       const animal_description = animal[selectedAnimal];
       divAnimalInfo.innerHTML = `<strong>${selectedAnimal}</strong>: ${animal_description}`;
+      window.history.pushState({}, document.title, "/");
   }
 });
 

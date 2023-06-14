@@ -46,13 +46,12 @@ app.get('/:id', async (req, res) => {
   try {
     const animals = await getAnimals();
     const animalId = req.params.id;
-    console.log(animalId);
     if (animalId) {
       db.get('SELECT * FROM Animals WHERE animal_id = ?', [animalId], (err, row) => {
         if (err) {
-          throw new Error("Internal Server error - 500 error. Please try again later.");
+          res.render('index', { error: "Internal Server error - 500 error. Please try again later.", animalData: null, animals: animals });
         } else if (!row) {
-          throw new Error("Animal not Found - 404 error. Please select a valid animal.");
+          res.render('index', { error: "Animal not Found - 404 error. Please select a valid animal.", animalData: null, animals: animals });
         } else {
           const animalData = {
             animalId: animalId,
@@ -66,7 +65,6 @@ app.get('/:id', async (req, res) => {
       res.render('index', { error: null, animalData: null, animals: animals });
     }
   } catch (error) {
-    console.error(error);
     res.render('index', { error: error, animalData: null, animals: null });
   }
 });
